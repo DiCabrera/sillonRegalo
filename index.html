@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profile Card</title>
+<link rel="stylesheet" href="styles.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+</style>
+</head>
+<body>
+
+  <div class="card">
+    <div class="photo">
+      <img class="photo" src="assets/images/sillon4.avif" alt="">
+    </div>
+
+    <div class="body">
+      <div class="name">Cumpleaños Alexis</div>
+      <p class="bio">Para mi cumpleaños quiero este sillón Dyvlinge de Ikea.</p>
+
+      <div class="goal">
+        $<span id="current" contenteditable="true">7.990</span>
+        /
+        $<span id="target" contenteditable="true">119.990</span>
+      </div>
+
+      <div class="progress-wrap">
+        <div class="progress-fill" id="progress-fill"></div>
+        <div class="progress-label" id="progress-label">0%</div>
+      </div>
+<br>
+      <button class="follow-btn">Copiar datos ⧉</button>
+    </div>
+
+    <div class="card">
+      <div class="body">
+        <p class="bio">
+          Diego felipe Cabrera<br>
+          204193665<br>
+          diegoc1739@gmail.com<br>
+          BANCO_FALABELLA<br>
+          Cuenta Corriente
+          1-584-220880-0</p>
+      </div>
+    </div>
+  </div>
+
+  
+
+  <script>
+    const currentEl = document.getElementById('current');
+    const targetEl = document.getElementById('target');
+    const fillEl = document.getElementById('progress-fill');
+    const labelEl = document.getElementById('progress-label');
+
+    function parseNumber(str) {
+      // soporta "150.000" (punto como separador de miles)
+      const clean = str.replace(/\./g, '').replace(/,/g, '.').trim();
+      const n = parseFloat(clean);
+      return isNaN(n) ? 0 : n;
+    }
+
+    function updateProgress() {
+      const current = parseNumber(currentEl.textContent);
+      const target = parseNumber(targetEl.textContent);
+      let pct = target > 0 ? (current / target) * 100 : 0;
+      pct = Math.max(0, Math.min(100, pct));
+
+      fillEl.style.width = pct + '%';
+      labelEl.textContent = Math.round(pct) + '%';
+    }
+
+    currentEl.addEventListener('input', updateProgress);
+    targetEl.addEventListener('input', updateProgress);
+
+    updateProgress();
+  </script>
+
+</body>
+</html>
