@@ -5,9 +5,20 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #f2f2f2;
+    background: rgb(242, 242, 242);
     font-family: "Inter", -apple-system, sans-serif;
   }
+
+  body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: url('assets/images/bgPattern.png') repeat center center;
+  background-size: 200px 200px;
+  opacity: 0.3;
+  z-index: -1;
+  }
+
 
   .card {
     width: 260px;
@@ -119,3 +130,55 @@
   .follow-btn:hover {
     background: #e6e6e6;
   }
+
+    /* ---------- Carrusel ---------- */
+  .carrusel {
+    height: 260px;
+    overflow: hidden;
+  }
+
+  .carrusel-pista {
+    display: flex;
+    height: 100%;
+    transition: transform 0.6s ease-in-out;
+  }
+
+  .carrusel-slide {
+    min-width: 100%;
+    height: 100%;
+    background: #d9d9d9;
+  }
+
+  .carrusel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .pattern{
+    background-color: rgb(245,242,242);
+    background-image: url('assets/images/bgPattern.png');
+    background-repeat: repeat;
+    background-size: 50px 50px;
+  }
+
+  .rain-item {
+  position: fixed;
+  top: -80px;
+  opacity: 0.7;
+  animation: fall linear forwards;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}

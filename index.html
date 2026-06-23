@@ -13,8 +13,18 @@
 <body>
 
   <div class="card">
+    <!--
     <div class="photo">
       <img class="photo" src="assets/images/sillon4.avif" alt="">
+    </div>
+   -->
+    <div class="carrusel">
+      <div class="carrusel-pista" id="pista">
+        <div class="carrusel-slide"><img src="assets/images/sillon4.avif" alt="Foto 1"></div>
+        <div class="carrusel-slide"><img src="assets/images/sillon3.avif" alt="Foto 2"></div>
+        <div class="carrusel-slide"><img src="assets/images/sillon2.avif" alt="Foto 3"></div>
+        <div class="carrusel-slide"><img src="assets/images/sillon1.avif" alt="Foto 4"></div>
+      </div>
     </div>
 
     <div class="body">
@@ -22,9 +32,9 @@
       <p class="bio">Para mi cumpleaños quiero este sillón Dyvlinge de Ikea.</p>
 
       <div class="goal">
-        $<span id="current" contenteditable="true">7.990</span>
+        $<span id="current" contenteditable="false">7.990</span>
         /
-        $<span id="target" contenteditable="true">119.990</span>
+        $<span id="target" contenteditable="false">119.990</span>
       </div>
 
       <div class="progress-wrap">
@@ -32,7 +42,7 @@
         <div class="progress-label" id="progress-label">0%</div>
       </div>
 <br>
-      <button class="follow-btn">Copiar datos ⧉</button>
+       <button class="follow-btn" id="copy-btn" onclick="copiarDatos()">Copiar datos ⧉</button>
     </div>
 
     <div class="card">
@@ -79,5 +89,47 @@
     updateProgress();
   </script>
 
+ <script>
+    const pista = document.getElementById('pista');
+    const totalSlides = pista.children.length;
+    let actual = 0;
+    setInterval(() => {
+      actual = (actual + 1) % totalSlides;
+      pista.style.transform = 'translateX(-' + actual * 100 + '%)';
+    }, 3000);
+  </script>
+
+<script>
+    function copiarDatos() {
+      const texto = `Diego felipe Cabrera\n204193665\ndiegoc1739@gmail.com\nBANCO_FALABELLA\nCuenta Corriente\n1-584-220880-0`;
+      navigator.clipboard.writeText(texto).then(() => {
+        const btn = document.getElementById('copy-btn');
+        btn.textContent = '¡Copiado! ✓';
+        setTimeout(() => { btn.textContent = 'Copiar datos ⧉'; }, 2000);
+      });
+    }
+  </script>
+<script>
+
+const images = [
+  'assets/images/pic1.png',
+  'assets/images/pic2.png',
+];
+
+  function createRain() {
+    const img = document.createElement('img');
+    img.src = images[Math.floor(Math.random() * images.length)];
+    img.classList.add('rain-item');
+    img.style.left = Math.random() * 100 + 'vw';
+    img.style.width = (40 + Math.random() * 50) + 'px';
+    img.style.animationDuration = (2 + Math.random() * 4) + 's';
+    img.style.animationDelay = (Math.random() * 2) + 's';
+    document.body.appendChild(img);
+
+    img.addEventListener('animationend', () => img.remove());
+  }
+  setInterval(createRain, 300);
+
+</script>
 </body>
 </html>
